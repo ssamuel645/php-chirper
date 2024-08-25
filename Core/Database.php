@@ -1,5 +1,9 @@
 <?php
 
+namespace Core;
+
+use PDO;
+
 class Database
 {
     public $connection;
@@ -7,7 +11,7 @@ class Database
 
     public function __construct($config)
     {
-        $dsn = "{$config['db']}:{$config['dbname']}";
+        $dsn = "{$config['db']}:{$config['dbpath']}";
         $this->connection = new PDO($dsn, '', '', [
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
@@ -15,6 +19,7 @@ class Database
 
     public function query($query, $params = [])
     {
+        //dd($query);
         $this->statement = $this->connection->prepare($query);
         $this->statement->execute($params);
 

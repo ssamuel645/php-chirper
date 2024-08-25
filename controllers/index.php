@@ -1,8 +1,10 @@
 <?php
 
+use Core\Database;
+
 $heading = 'Home';
 
-$config = require 'config.php';
+$config = require base_path('config.php');
 $db = new Database($config['database']);
 
 $chirps = $db->query('

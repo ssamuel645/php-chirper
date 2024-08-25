@@ -1,5 +1,7 @@
 <?php
 
+use Core\Response;
+
 function dd($value)
 {
     echo "<pre>";
@@ -18,7 +20,7 @@ function abort($code = 404)
 {
     http_response_code($code);
 
-    require "views/$code.php";
+    view("errors/$code");
 
     die();
 }

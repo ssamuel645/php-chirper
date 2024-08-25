@@ -3,6 +3,6 @@
 return [
     'database' => [
         'db' => 'sqlite',
-        'dbname' => 'chirper.db'
+        'dbpath' => '../chirper.db'
     ]
 ];

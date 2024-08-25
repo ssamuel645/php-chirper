@@ -1,10 +1,11 @@
 <?php
 
-require 'Validator.php';
+use Core\Database;
+use Core\Validator;
 
 $heading = 'Home';
 
-$config = require 'config.php';
+$config = require base_path('config.php');
 $db = new Database($config['database']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
