@@ -4,9 +4,19 @@
 
 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
   <form
-    action="/chirps/create"
+    action="/chirps"
     method="POST"
   >
+    <input
+      type="hidden"
+      name="_method"
+      value="PUT"
+    />
+    <input
+      type="hidden"
+      name="id"
+      value="<?= $chirp['id'] ?>"
+    />
     <label
       for="content"
       class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
@@ -35,7 +45,7 @@
         id="content"
         name="content"
         class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
-        value="<?= $chirp['content'] ?>"
+        value="<?= !empty($errors) ? htmlspecialchars($_POST['content']) : htmlspecialchars($chirp['content']) ?>"
       />
 
       <button
@@ -46,6 +56,18 @@
       </button>
     </div>
   </form>
+
+  <?php if (isset($errors)) : ?>
+  <?php if (isset($errors['content'])) : ?>
+  <p class="mt-2 text-sm font-medium text-red-600 dark:text-red-500">
+    <?= $errors['content'] ?>
+  </p>
+  <?php else : ?>
+  <p class="mt-2 text-sm text-green-600 dark:text-green-500">
+    <span class="font-medium">Congrats!</span> Your chirp was posted.
+  </p>
+  <?php endif ?>
+  <?php endif; ?>
 </div>
 
 <?php view('partials/footer'); ?>

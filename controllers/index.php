@@ -1,15 +1,14 @@
 <?php
 
+use Core\App;
 use Core\Database;
 
 $heading = 'Home';
 
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+$db = App::resolve(Database::class);
 
-$chirps = $db->query('
-select * from chirps inner join users
-on chirps.user_id = users.id;
-')->get();
+$chirps = $db
+    ->query('select * from chirps inner join users on chirps.user_id = users.id')
+    ->get();
 
 view('index', compact('heading', 'chirps'));

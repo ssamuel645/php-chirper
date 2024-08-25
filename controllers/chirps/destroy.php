@@ -1,26 +1,23 @@
 <?php
 
+use Core\App;
 use Core\Database;
 
 $heading = 'My Chirps';
-$config = require base_path('config.php');
-$db = new Database($config['database']);
 
+$db = App::resolve(Database::class);
 
 $currentUserId = 2;
 
-$chirp = $db->query(
-    'select * from chirps where id = :id',
-    [
-        'id' => $_GET['id']
-    ]
-)->findOrFail();
+$chirp = $db->query('select * from chirps where id = :id', [
+    'id' => $_POST['id']
+])->findOrFail();
 
-if (authorize($chirp['user_id'] === $currentUserId)) {
-    $db->query('delete from chirps where id = :id', [
-        'id' => $chirp['chirpId']
-    ]);
-}
+authorize($chirp['user_id'] === $currentUserId);
 
-header('location: /notes');
+$db->query('DELETE FROM chirps WHERE id = :id', [
+    'id' => $_POST['id']
+]);
+
+header('location: /chirps');
 exit();

@@ -1,20 +1,16 @@
 <?php
 
+use Core\App;
 use Core\Database;
 
 $heading = 'My Chirps';
-$config = require base_path('config.php');
-$db = new Database($config['database']);
+$db = App::resolve(Database::class);
 
 $currentUserId = 2;
 
-$chirp = $db->query(
-    'select chirps.id as chirpId, content, user_id, name, email from chirps inner join users
-    on chirps.user_id = users.id where chirpId = :chirpId;',
-    [
-        'chirpId' => $_GET['id']
-    ]
-)->findOrFail();
+$chirp = $db->query('select * from chirps where id = :id', [
+    'id' => $_GET['id']
+])->findOrFail();
 
 authorize($chirp['user_id'] === $currentUserId);
 

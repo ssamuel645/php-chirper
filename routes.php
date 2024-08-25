@@ -1,16 +1,9 @@
 <?php
 
-return [
-    '/' => 'controllers/index.php',
+$router->get('/', 'index');
 
-    '/chirps' => 'controllers/chirps/index.php',
-    '/chirps/edit' => 'controllers/chirps/edit.php',
-    '/chirps/create' => 'controllers/chirps/store.php'
-];
-
-$router->get('/', 'index.php');
-
-$router->get('/chirps', 'chirps/index.php');
-$router->post('/chirps', 'chirps/store.php');
-$router->get('/chirps', 'chirps/edit.php');
-$router->get('/chirps', 'chirps/destroy.php');
+$router->get('/chirps', 'chirps/index');
+$router->post('/chirps', 'chirps/store');
+$router->get('/chirps/edit', 'chirps/edit');
+$router->put('/chirps', 'chirps/update');
+$router->delete('/chirps', 'chirps/destroy');
