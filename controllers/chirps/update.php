@@ -10,13 +10,12 @@ $db = App::resolve(Database::class);
 $currentUserId = 2;
 
 $errors = [];
-
 if (! Validator::string($_POST['content'], 1, 255)) {
     $errors['content'] = 'Content of no more than 255 characters is required.';
 }
 
 $chirp = $db->query('SELECT * FROM chirps WHERE id = :id', [
-    'id' => $_GET['id']
+    'id' => $_POST['id']
 ])->findOrFail();
 
 authorize($chirp['user_id'] === $currentUserId);

@@ -15,4 +15,9 @@ class Validator
     {
         return filter_var($value, FILTER_VALIDATE_EMAIL);
     }
+
+    public static function password($password, $repeat_password)
+    {
+        return $password === $repeat_password;
+    }
 }

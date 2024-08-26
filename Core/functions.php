@@ -2,10 +2,10 @@
 
 use Core\Response;
 
-function dd($value)
+function dd(...$values)
 {
     echo "<pre>";
-    var_dump($value);
+    var_dump(...$values);
     echo "</pre>";
 
     die();
