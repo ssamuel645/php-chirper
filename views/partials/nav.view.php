@@ -18,12 +18,14 @@
               aria-current="page"
               >Dashboard</a
             >
+            <?php if ($_SESSION['user'] ?? false) : ?>
             <a
               href="/chirps"
               class="<?php echo urlIs('/chirps') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' ?> rounded-md px-3 py-2 text-sm font-medium text-gray-300"
             >
               My Chirps</a
             >
+            <?php endif ; ?>
           </div>
         </div>
       </div>
@@ -31,11 +33,22 @@
         class="flex items-center md:order-2 space-x-1 md:space-x-2 rtl:space-x-reverse"
       >
         <?php if ($_SESSION['user'] ?? false) : ?>
-        <a
-          href="/logout"
-          class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
-          >Log out</a
+        <form
+          action="/login"
+          method="post"
         >
+          <input
+            type="hidden"
+            name="_method"
+            value="DELETE"
+          />
+          <button
+            type="submit"
+            class="text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 md:px-5 md:py-2.5 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800"
+          >
+            Log out
+          </button>
+        </form>
 
         <?php	else : ?>
         <a

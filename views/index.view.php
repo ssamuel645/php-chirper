@@ -4,6 +4,7 @@
 
 <main>
   <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <?php if ($_SESSION['user'] ?? false) : ?>
     <form
       action="/chirps"
       method="POST"
@@ -65,7 +66,7 @@
     <hr
       class="w-48 h-1 mx-auto my-4 bg-gray-100 border-0 rounded md:my-10 dark:bg-gray-700"
     />
-
+    <?php endif; ?>
     <div
       class="w-full bg-white border border-gray-200 rounded-lg shadow sm:p-8 d"
     >

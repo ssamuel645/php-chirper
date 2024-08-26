@@ -2,8 +2,9 @@
 
 $router->get('/', 'index');
 
-$router->get('/login', 'sessions/create')->only('guest');
-$router->get('/logout', 'sessions/destroy')->only('auth');
+$router->get('/login', 'session/create')->only('guest');
+$router->post('/login', 'session/store')->only('guest');
+$router->delete('/login', 'session/destroy')->only('auth');
 
 $router->get('/register', 'users/create')->only('guest');
 $router->post('/register', 'users/store')->only('guest');
