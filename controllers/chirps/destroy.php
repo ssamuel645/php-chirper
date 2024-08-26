@@ -3,13 +3,11 @@
 use Core\App;
 use Core\Database;
 
-$heading = 'My Chirps';
-
 $db = App::resolve(Database::class);
 
 $currentUserId = 2;
 
-$chirp = $db->query('select * from chirps where id = :id', [
+$chirp = $db->query('SELECT * FROM chirps WHERE id = :id', [
     'id' => $_POST['id']
 ])->findOrFail();
 

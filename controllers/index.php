@@ -3,12 +3,13 @@
 use Core\App;
 use Core\Database;
 
-$heading = 'Home';
-
 $db = App::resolve(Database::class);
 
 $chirps = $db
-    ->query('select * from chirps inner join users on chirps.user_id = users.id')
+    ->query('SELECT * FROM chirps INNER JOIN  users ON chirps.user_id = users.id')
     ->get();
 
-view('index', compact('heading', 'chirps'));
+view('index', [
+    'heading' => 'Home',
+    'chirps' => array_reverse($chirps)
+]);

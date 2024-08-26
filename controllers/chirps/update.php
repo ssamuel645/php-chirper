@@ -15,19 +15,24 @@ if (! Validator::string($_POST['content'], 1, 255)) {
     $errors['content'] = 'Content of no more than 255 characters is required.';
 }
 
-if (! empty($errors)) {
-    $chirps = $db->query('select chirps.id as chirpId, content, name, email
-from chirps inner join users on chirps.user_id = users.id where user_id = :user_id;', [
-        'user_id' => $currentUserId
-    ])->get();
+$chirp = $db->query('SELECT * FROM chirps WHERE id = :id', [
+    'id' => $_GET['id']
+])->findOrFail();
 
+authorize($chirp['user_id'] === $currentUserId);
 
-    return view('chirps/edit', compact('heading', 'errors'));
+if (empty($errors)) {
+    $db->query('UPDATE chirps SET content = :content WHERE id = :id', [
+        'content' => $_POST['content'],
+        'id' => $_POST['id']
+    ]);
+
+    header('location: /chirps');
+    exit();
 }
 
-$db->query('UPDATE chirps SET content = :content WHERE id = :id', [
-    'content' => $_POST['content'],
-    'id' => $_POST['id']
+view('chirps/edit', [
+    'heading' => 'Edit chirp',
+    'chirp' => $chirp,
+    'errors' => $errors
 ]);
-
-view('chirps/index', compact('heading', 'chirps'));

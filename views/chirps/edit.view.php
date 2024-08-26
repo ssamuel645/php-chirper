@@ -22,29 +22,11 @@
       class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
     ></label>
     <div class="relative">
-      <div
-        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="size-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-          />
-        </svg>
-      </div>
       <input
         type="text"
         id="content"
         name="content"
-        class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+        class="block w-full py-4 ps-5 text-sm text-gray-900 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
         value="<?= !empty($errors) ? htmlspecialchars($_POST['content']) : htmlspecialchars($chirp['content']) ?>"
       />
 
@@ -68,6 +50,14 @@
   </p>
   <?php endif ?>
   <?php endif; ?>
+  <p class="mt-6">
+    <a
+      href="/chirps"
+      class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+    >
+      Cancel
+    </a>
+  </p>
 </div>
 
 <?php view('partials/footer'); ?>
