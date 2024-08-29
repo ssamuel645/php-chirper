@@ -15,7 +15,7 @@ if (! Validator::string($_POST['content'], 1, 255)) {
 if (empty($errors)) {
     $db->query('INSERT INTO chirps (content, user_id) VALUES (:content, :user_id)', [
         'content' => $_POST['content'],
-        'user_id' => 2
+        'user_id' => $_SESSION['user']['id']
     ]);
 }
 
@@ -25,6 +25,6 @@ $chirps = $db
 
 view('index', [
     'heading' => 'Home',
-    'chirps' => $chirps,
+    'chirps' => array_reverse($chirps),
     'errors' => $errors
 ]);

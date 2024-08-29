@@ -7,7 +7,6 @@ use Core\Database;
 $heading = 'My Chirp';
 
 $db = App::resolve(Database::class);
-$currentUserId = 2;
 
 $errors = [];
 if (! Validator::string($_POST['content'], 1, 255)) {
@@ -18,7 +17,7 @@ $chirp = $db->query('SELECT * FROM chirps WHERE id = :id', [
     'id' => $_POST['id']
 ])->findOrFail();
 
-authorize($chirp['user_id'] === $currentUserId);
+authorize($chirp['user_id'] === $_SESSION['user']['id']);
 
 if (empty($errors)) {
     $db->query('UPDATE chirps SET content = :content WHERE id = :id', [

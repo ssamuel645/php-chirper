@@ -46,7 +46,13 @@ if ($user) {
         'password' => password_hash($password, PASSWORD_BCRYPT)
     ]);
 
-    login($user);
+    $user = $db->query('SELECT * FROM users WHERE email = :email', compact('email'))->find();
+
+    login([
+        'id' => $user['id'],
+        'name' => $user['name'],
+        'email' => $user['email']
+    ]);
 
     header('location: /');
     exit();

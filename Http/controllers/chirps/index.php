@@ -5,16 +5,16 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 2;
 
 $chirps = $db
     ->query(
         'SELECT chirps.id AS chirpId, content, name, email FROM chirps
         INNER JOIN users ON chirps.user_id = users.id WHERE user_id = :user_id',
         [
-            'user_id' => $currentUserId
+            'user_id' => $_SESSION['user']['id']
         ]
     )->get();
+
 
 view('chirps/index', [
     'heading' => 'My chirps',
