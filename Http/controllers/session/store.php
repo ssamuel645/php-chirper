@@ -16,3 +16,5 @@ if (! $signedIn) {
     $form->error('email', 'No accounts found for provided email and password.')
         ->throw();
 }
+
+redirect('/');
