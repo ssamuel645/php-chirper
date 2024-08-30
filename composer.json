@@ -1,0 +1,17 @@
+{
+  "name": "ssamu/php-chirper",
+  "description": "Microblogging platform built with vanilla php",
+  "autoload": {
+    "psr-4": {
+      "Core\\": "Core/",
+      "Http\\": "Http/"
+    }
+  },
+  "authors": [
+    {
+      "name": "ssamuel645",
+      "email": "ssamuel645@gmail.com"
+    }
+  ],
+  "require": {}
+}

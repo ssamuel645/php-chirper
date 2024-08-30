@@ -5,15 +5,11 @@ use Core\Exceptions\ValidationException;
 
 define('BASE_PATH', __DIR__ . '/../');
 
+require BASE_PATH . 'vendor/autoload.php';
+
 session_start();
 
 require BASE_PATH . 'Core/functions.php';
-
-spl_autoload_register(function ($class) {
-    $class = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
-
-    require base_path($class);
-});
 
 require base_path('bootstrap.php');
 
