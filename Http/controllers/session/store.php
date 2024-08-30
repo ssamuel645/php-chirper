@@ -1,20 +1,18 @@
 <?php
 
 use Core\Authenticator;
-use Core\Session;
 use Http\Forms\LoginForm;
 
 extract($_POST);
-$form = new LoginForm();
 
-if ($form->validate($email, $password)) {
-    if ((new Authenticator)->attempt($email, $password)) {
-        redirect('/');
-    }
+$form = LoginForm::validate([
+    'email' => $email,
+    'password' => $password
+]);
 
-    $form->error('email', 'No accounts found for provided email and password.');
+$signedIn = (new Authenticator)->attempt($email, $password);
+
+if (! $signedIn) {
+    $form->error('email', 'No accounts found for provided email and password.')
+        ->throw();
 }
-
-Session::flash('errors', $form->errors());
-
-redirect('/login');
