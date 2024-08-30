@@ -8,8 +8,10 @@ use Core\Authenticator;
 extract($_POST);
 
 $form = RegistrationForm::validate([
+    'name' => $name,
     'email' => $email,
-    'password' => $password
+    'password' => $password,
+    'repeat_password' => $repeat_password
 ]);
 
 $db = App::resolve(Database::class);

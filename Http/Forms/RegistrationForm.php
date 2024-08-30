@@ -12,25 +12,26 @@ class RegistrationForm
     public function __construct(public array $attributes)
     {
         if (!Validator::string($attributes['name'], 3, 100)) {
-            $errors['name'] = 'Name must have at least 3 characters and no more than 100.';
+            $this->errors['name'] = 'Name must have at least 3 characters and no more than 100.';
         }
 
         if (!Validator::email($attributes['email'])) {
-            $errors['email'] = 'Please enter a valid email address.';
+            $this->errors['email'] = 'Please enter a valid email address.';
         }
 
         if (!Validator::string($attributes['password'], 6, 100)) {
-            $errors['password'] = 'Passwords must have at least 6 characters and no more than 100.';
+            $this->errors['password'] = 'Passwords must have at least 6 characters and no more than 100.';
         }
 
         if (!Validator::password($attributes['password'], $attributes['repeat_password'])) {
-            $errors['repeat_password'] = 'Provided password does not match.';
+            $this->errors['repeat_password'] = 'Provided password does not match.';
         }
     }
 
     public static function validate($attributes)
     {
         $instance = new static($attributes);
+
 
         return $instance->failed() ? $instance->throw() : $instance;
     }
