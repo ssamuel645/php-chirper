@@ -1,6 +1,7 @@
 <?php
 
 use Core\Authenticator;
+use Core\Session;
 use Http\Forms\LoginForm;
 
 extract($_POST);
@@ -14,7 +15,6 @@ if ($form->validate($email, $password)) {
     $form->error('email', 'No accounts found for provided email and password.');
 }
 
-view('session/create', [
-    'heading' => 'Log In!',
-    'errors' => $form->errors()
-]);
+Session::flash('errors', $form->errors());
+
+redirect('/login');
